@@ -43,15 +43,14 @@ public class ServiceService {
 
 	@SuppressWarnings("deprecation")
 	@Transactional
-	public ServiceDTO createServiceInTheSameDate(Long idService, ServiceDTO dto) {
+	public ServiceDTO createService(Long idService, ServiceDTO dto) {
 
-		com.practice.test.dsin.testDsin.entities.Service createSameDate = repository.getOne(idService);
+		com.practice.test.dsin.testDsin.entities.Service createSameDate = repository.getById(idService);
 		com.practice.test.dsin.testDsin.entities.Service entity = new com.practice.test.dsin.testDsin.entities.Service();
 
 		LocalDateTime todayPlusSeven = LocalDateTime.now().plusDays(7);
 
-		if (todayPlusSeven.isAfter(createSameDate.getDateOfService())
-				&& createSameDate.getDateOfService().isAfter(todayPlusSeven)) {
+		if (todayPlusSeven.isAfter(createSameDate.getDateOfService()) && createSameDate.getDateOfService().isBefore(todayPlusSeven)) {
 			entity.setDateOfService(createSameDate.getDateOfService());
 		} else {
 			entity.setDateOfService(dto.getDateOfService());

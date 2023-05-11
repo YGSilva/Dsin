@@ -1,0 +1,328 @@
+{
+	"info": {
+		"_postman_id": "cd95fc92-c3d9-4a65-9b67-fe9aff114d83",
+		"name": "DSIN",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19966892"
+	},
+	"item": [
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "DELETE CLIENT",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cpf\": \"123.123.123-11\",\r\n    \"name\": \"aaaaa\",\r\n    \"cellNumber\": \"11 11111-2222\",\r\n    \"specialty\": \"manicure\",\r\n    \"dateTimeOfService\": \"11/11/1111 11:11:11\",\r\n    \"serviceStatus\": \"NOT_CONFIRMED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/client/deleteClient/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"deleteClient",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LIST ALL CLIENTS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/client/listClients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"listClients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE NEW CLIENT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nameClient\": \"Marleide Goncalves da Silva\",\r\n    \"cellNumber\": \"(61) 916015-1908\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/client/insertClient",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"insertClient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ALTER CLIENT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nameClient\": \"Marleide Goncalves da Silva Dourado\",\r\n    \"cellNumber\": \"(61) 99312-4772\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/client/alterClient/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"client",
+								"alterClient",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Service",
+			"item": [
+				{
+					"name": "DELETE SERVICE BY ID CLIENT",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cpf\": \"123.123.123-11\",\r\n    \"name\": \"aaaaa\",\r\n    \"cellNumber\": \"11 11111-2222\",\r\n    \"specialty\": \"manicure\",\r\n    \"dateTimeOfService\": \"11/11/1111 11:11:11\",\r\n    \"serviceStatus\": \"NOT_CONFIRMED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/service/deleteServiceByIdClient/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"service",
+								"deleteServiceByIdClient",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "HISTORY SERVICES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/service/historyServices",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"service",
+								"historyServices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "HISTORY SERVICE BETWEEN DATES",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/service/historyServicesBetween?startDate=2000-10-18T12:12:12&finishDate=2024-03-01T09:33:43",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"service",
+								"historyServicesBetween"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2000-10-18T12:12:12"
+								},
+								{
+									"key": "finishDate",
+									"value": "2024-03-01T09:33:43"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE SERVICE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idClient\": {\r\n        \"idClient\": 2,\r\n        \"nameClient\": \"Yasmin Alves Costa\",\r\n        \"cellNumber\": \"(61) 97387-8455\"\r\n    },\r\n    \"dateOfService\": \"2023-05-12T09:07:48\",\r\n    \"serviceStatus\": \"CONFIRMED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/service/createService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"service",
+								"createService"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE SERVICE IN THE SAME DATE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idClient\": {\r\n        \"idClient\": 2,\r\n        \"nameClient\": \"Yasmin Alves Costa\",\r\n        \"cellNumber\": \"(61) 97387-8455\"\r\n    },\r\n    \"dateOfService\": \"2023-05-14T09:07:48\",\r\n    \"serviceStatus\": \"NOT_ATENDED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/service/createService/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"service",
+								"createService",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CHANGE SERVICE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dateOfService\": \"2023-05-13T09:07:48\",\r\n    \"serviceStatus\": \"NOT_CONFIRMED\",\r\n    \"message\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/service/changeService/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"service",
+								"changeService",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CHANGE SERVICE BY LEILA",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dateOfService\": \"2023-05-18T09:07:48\",\r\n    \"serviceStatus\": \"NOT_CONFIRMED\",\r\n    \"message\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/service/changeServiceByLeila/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"service",
+								"changeServiceByLeila",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

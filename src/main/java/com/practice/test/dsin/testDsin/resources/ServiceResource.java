@@ -32,8 +32,8 @@ public class ServiceResource {
 	}
 
 	@PostMapping(value = "/createService/{idService}")
-	private ResponseEntity<ServiceDTO> createServiceInTheSameDate(@PathVariable Long idService, @RequestBody ServiceDTO dto) {
-		dto = service.createServiceInTheSameDate(idService, dto);
+	private ResponseEntity<ServiceDTO> createService(@PathVariable Long idService, @RequestBody ServiceDTO dto) {
+		dto = service.createService(idService, dto);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idService}")
 				.buildAndExpand(dto.getIdService()).toUri();
