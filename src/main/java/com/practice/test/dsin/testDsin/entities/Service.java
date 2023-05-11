@@ -35,17 +35,20 @@ public class Service implements Serializable {
 	private LocalDateTime dateOfService;
 	@Enumerated(EnumType.STRING)
 	private ServiceStatus serviceStatus;
+	private String message;
 
 	public Service() {
 		super();
 	}
 
-	public Service(Long idService, Client idClient, LocalDateTime dateOfService, ServiceStatus serviceStatus) {
+	public Service(Long idService, Client idClient, LocalDateTime dateOfService, ServiceStatus serviceStatus,
+			String message) {
 		super();
 		this.idService = idService;
 		this.idClient = idClient;
 		this.dateOfService = dateOfService;
 		this.serviceStatus = serviceStatus;
+		this.message = message;
 	}
 
 	public Long getIdService() {
@@ -78,5 +81,13 @@ public class Service implements Serializable {
 
 	public void setServiceStatus(ServiceStatus serviceStatus) {
 		this.serviceStatus = serviceStatus;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 }

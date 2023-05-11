@@ -21,17 +21,20 @@ public class ServiceDTO implements Serializable {
 	private LocalDateTime dateOfService;
 	@Enumerated(EnumType.STRING)
 	private ServiceStatus serviceStatus;
+	private String message;
 
 	public ServiceDTO() {
 		super();
 	}
 
-	public ServiceDTO(Long idService, Client idClient, LocalDateTime dateOfService, ServiceStatus serviceStatus) {
+	public ServiceDTO(Long idService, Client idClient, LocalDateTime dateOfService, ServiceStatus serviceStatus,
+			String message) {
 		super();
 		this.idService = idService;
 		this.idClient = idClient;
 		this.dateOfService = dateOfService;
 		this.serviceStatus = serviceStatus;
+		this.message = message;
 	}
 	
 	public ServiceDTO(Service entity) {
@@ -40,6 +43,7 @@ public class ServiceDTO implements Serializable {
 		this.idClient = entity.getIdClient();
 		this.dateOfService = entity.getDateOfService();
 		this.serviceStatus = entity.getServiceStatus();
+		this.message = entity.getMessage();
 	}
 
 	public Long getIdService() {
@@ -74,4 +78,11 @@ public class ServiceDTO implements Serializable {
 		this.serviceStatus = serviceStatus;
 	}
 
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
 }

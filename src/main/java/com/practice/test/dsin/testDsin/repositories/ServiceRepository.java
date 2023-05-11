@@ -27,8 +27,4 @@ public interface ServiceRepository extends JpaRepository<Service, Long> {
 	@Transactional 
 	@Query(value = "SELECT * FROM TB_SERVICE  WHERE DATE_OF_SERVICE BETWEEN :start AND :finish", nativeQuery = true)
 	List<Service> findAllBetween(LocalDateTime start, LocalDateTime finish);
-
-	
-	
-	
 }

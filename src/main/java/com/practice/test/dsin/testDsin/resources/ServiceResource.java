@@ -32,11 +32,21 @@ public class ServiceResource {
 		return ResponseEntity.ok().body(list);
 	}
 
+	@PostMapping(value = "/createService/{idService}")
+	private ResponseEntity<ServiceDTO> createService(@PathVariable Long idService, @RequestBody ServiceDTO dto) {
+		dto = service.createService(idService, dto);
+
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idService}")
+				.buildAndExpand(dto.getIdService()).toUri();
+
+		return ResponseEntity.created(uri).body(dto);
+	}
+	
 	@PostMapping(value = "/createService")
 	private ResponseEntity<ServiceDTO> createService(@RequestBody ServiceDTO dto) {
 		dto = service.createService(dto);
 
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{serviceId}")
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idService}")
 				.buildAndExpand(dto.getIdService()).toUri();
 
 		return ResponseEntity.created(uri).body(dto);
@@ -44,16 +54,17 @@ public class ServiceResource {
 
 	@PutMapping(value = "/changeStatusService/{idService}")
 	public ServiceDTO changeStatusService(@PathVariable Long idService, @RequestBody ServiceDTO dto) {
-		return service.changeStatusService(idService, dto);
+		return service.changeService(idService, dto);
 	}
 
-	@GetMapping(value = "/historyServicesBetween")
-	private ResponseEntity<List<ServiceDTO>> HistoryServicesBetween(
-			@RequestParam("startDate") String start,
-			@RequestParam("finishDate") String finish) {
-		List<ServiceDTO> list = service.historyServicesBetween(start, finish);
-		return ResponseEntity.ok().body(list);
-	}
+	//METEDO COM ERRO
+//	@GetMapping(value = "/historyServicesBetween")
+//	private ResponseEntity<List<ServiceDTO>> HistoryServicesBetween(
+//			@RequestParam("startDate") String start,
+//			@RequestParam("finishDate") String finish) {
+//		List<ServiceDTO> list = service.historyServicesBetween(start, finish);
+//		return ResponseEntity.ok().body(list);
+//	}
 
 	@DeleteMapping(value = "/deleteServiceByIdClient/{idClient}")
 	private ResponseEntity<Void> deleteServiceByClient(@PathVariable Long idClient) {
