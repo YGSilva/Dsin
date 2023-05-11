@@ -43,14 +43,15 @@ public class ServiceService {
 
 	@SuppressWarnings("deprecation")
 	@Transactional
-	public ServiceDTO createService(Long idService, ServiceDTO dto) {
+	public ServiceDTO createServiceInTheSameDate(Long idService, ServiceDTO dto) {
 
 		com.practice.test.dsin.testDsin.entities.Service createSameDate = repository.getOne(idService);
 		com.practice.test.dsin.testDsin.entities.Service entity = new com.practice.test.dsin.testDsin.entities.Service();
 
 		LocalDateTime todayPlusSeven = LocalDateTime.now().plusDays(7);
 
-		if (todayPlusSeven.isAfter(createSameDate.getDateOfService()) && createSameDate.getDateOfService().isAfter(todayPlusSeven)) {
+		if (todayPlusSeven.isAfter(createSameDate.getDateOfService())
+				&& createSameDate.getDateOfService().isAfter(todayPlusSeven)) {
 			entity.setDateOfService(createSameDate.getDateOfService());
 		} else {
 			entity.setDateOfService(dto.getDateOfService());
@@ -74,6 +75,22 @@ public class ServiceService {
 				entity.setMessage("POR FAVOR LIGAR NO TELEFONE (61) 99212-4263");
 				return new ServiceDTO(entity);
 			}
+
+			entity.setDateOfService(dto.getDateOfService());
+			entity.setServiceStatus(dto.getServiceStatus());
+			entity = repository.save(entity);
+			return new ServiceDTO(entity);
+
+		} catch (ResourceNotFoundException e) {
+			throw new ResourceNotFoundException("ID`s " + dto.getIdService() + " NOT FOUND!");
+		}
+	}
+
+	@Transactional
+	@SuppressWarnings("deprecation")
+	public ServiceDTO changeServiceByLeila(Long idService, ServiceDTO dto) {
+		try {
+			com.practice.test.dsin.testDsin.entities.Service entity = repository.getOne(idService);
 
 			entity.setDateOfService(dto.getDateOfService());
 			entity.setServiceStatus(dto.getServiceStatus());

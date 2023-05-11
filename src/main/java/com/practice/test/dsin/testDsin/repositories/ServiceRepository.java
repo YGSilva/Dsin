@@ -17,12 +17,10 @@ import com.practice.test.dsin.testDsin.entities.Service;
 @Qualifier("jpaServiceRepository")
 public interface ServiceRepository extends JpaRepository<Service, Long> {
 
-	
 	@Transactional 
 	@Modifying
 	@Query(value = "DELETE FROM TB_SERVICE WHERE ID_CLIENT = ?1", nativeQuery = true)
 	int deleteServiceByClient(Long idClient);
-
 
 	@Transactional 
 	@Query(value = "SELECT * FROM TB_SERVICE  WHERE DATE_OF_SERVICE BETWEEN :start AND :finish", nativeQuery = true)

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -33,8 +32,8 @@ public class ServiceResource {
 	}
 
 	@PostMapping(value = "/createService/{idService}")
-	private ResponseEntity<ServiceDTO> createService(@PathVariable Long idService, @RequestBody ServiceDTO dto) {
-		dto = service.createService(idService, dto);
+	private ResponseEntity<ServiceDTO> createServiceInTheSameDate(@PathVariable Long idService, @RequestBody ServiceDTO dto) {
+		dto = service.createServiceInTheSameDate(idService, dto);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idService}")
 				.buildAndExpand(dto.getIdService()).toUri();
@@ -52,9 +51,20 @@ public class ServiceResource {
 		return ResponseEntity.created(uri).body(dto);
 	}
 
-	@PutMapping(value = "/changeStatusService/{idService}")
+	@PutMapping(value = "/changeService/{idService}")
 	public ServiceDTO changeStatusService(@PathVariable Long idService, @RequestBody ServiceDTO dto) {
 		return service.changeService(idService, dto);
+	}
+	
+	@PutMapping(value = "/changeServiceByLeila/{idService}")
+	public ServiceDTO changeServiceByLeila(@PathVariable Long idService, @RequestBody ServiceDTO dto) {
+		return service.changeServiceByLeila(idService, dto);
+	}
+
+	@DeleteMapping(value = "/deleteServiceByIdClient/{idClient}")
+	private ResponseEntity<Void> deleteServiceByClient(@PathVariable Long idClient) {
+		service.deleteByClient(idClient);
+		return ResponseEntity.noContent().build();
 	}
 
 	//METEDO COM ERRO
@@ -65,10 +75,4 @@ public class ServiceResource {
 //		List<ServiceDTO> list = service.historyServicesBetween(start, finish);
 //		return ResponseEntity.ok().body(list);
 //	}
-
-	@DeleteMapping(value = "/deleteServiceByIdClient/{idClient}")
-	private ResponseEntity<Void> deleteServiceByClient(@PathVariable Long idClient) {
-		service.deleteByClient(idClient);
-		return ResponseEntity.noContent().build();
-	}
 }
